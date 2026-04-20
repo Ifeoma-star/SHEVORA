@@ -2,74 +2,137 @@
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+:root {
+  --green-dark:   #0A5C46;
+  --green-mid:    #0F6E56;
+  --green-light:  #1D9E75;
+  --green-pale:   #E1F5EE;
+  --green-mint:   #9FE1CB;
+  --green-avatar: #5DCAA5;
+  --text-on-green:#E1F5EE;
+}
+
 #wrap {
-  display: flex; flex-direction: column; height: 620px; max-width: 500px;
-  margin: 1rem auto; border-radius: var(--border-radius-lg); overflow: hidden;
+  display: flex; flex-direction: column; height: 680px; max-width: 500px;
+  margin: 1rem auto; border-radius: 20px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(10,92,70,0.18);
   border: 0.5px solid var(--color-border-tertiary);
+  font-family: var(--font-sans, system-ui, sans-serif);
 }
 
 /* ── Header ── */
 #hdr {
-  background: #0F6E56; padding: 14px 18px;
+  background: linear-gradient(135deg, #0A5C46 0%, #0F6E56 60%, #1D9E75 100%);
+  padding: 14px 18px;
   display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  position: relative;
 }
 #av {
-  width: 42px; height: 42px; border-radius: 50%; background: #5DCAA5;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, #5DCAA5, #1D9E75);
   display: flex; align-items: center; justify-content: center;
-  font-size: 18px; font-weight: 600; color: #04342C; flex-shrink: 0;
+  font-size: 19px; font-weight: 700; color: #04342C; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
-#hdr-info h2 { color: #E1F5EE; font-size: 15px; font-weight: 600; }
-#hdr-info p  { color: #9FE1CB; font-size: 12px; margin-top: 2px; }
-#odot { width: 7px; height: 7px; background: #5DCAA5; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+#hdr-info h2 { color: #E1F5EE; font-size: 15px; font-weight: 700; letter-spacing: 0.2px; }
+#hdr-info p  { color: #9FE1CB; font-size: 11.5px; margin-top: 3px; display: flex; align-items: center; gap: 5px; }
+#odot {
+  width: 7px; height: 7px; background: #5DCAA5; border-radius: 50%;
+  display: inline-block; flex-shrink: 0;
+  box-shadow: 0 0 0 2px rgba(93,202,165,0.3);
+  animation: pulse 2.5s infinite;
+}
+@keyframes pulse { 0%,100%{box-shadow:0 0 0 2px rgba(93,202,165,0.3)} 50%{box-shadow:0 0 0 5px rgba(93,202,165,0.08)} }
+
+#hdr-badge {
+  margin-left: auto; background: rgba(255,255,255,0.12); color: #9FE1CB;
+  font-size: 10px; font-weight: 600; padding: 4px 9px; border-radius: 20px;
+  letter-spacing: 0.5px; text-transform: uppercase; white-space: nowrap;
+}
 
 /* ── Key screen ── */
 #key-screen {
   flex: 1; display: flex; flex-direction: column; align-items: center;
-  justify-content: center; padding: 2rem; gap: 16px;
+  justify-content: center; padding: 2rem; gap: 18px;
   background: var(--color-background-secondary);
 }
 .key-icon {
-  width: 56px; height: 56px; border-radius: 50%; background: #E1F5EE;
+  width: 64px; height: 64px; border-radius: 50%;
+  background: linear-gradient(135deg, #E1F5EE, #9FE1CB);
   display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  box-shadow: 0 4px 16px rgba(10,92,70,0.12);
 }
-#key-screen h3 { font-size: 16px; font-weight: 600; color: var(--color-text-primary); text-align: center; }
-#key-screen .key-desc { font-size: 13.5px; color: var(--color-text-secondary); text-align: center; line-height: 1.65; }
+#key-screen h3 { font-size: 17px; font-weight: 700; color: var(--color-text-primary); text-align: center; }
+#key-screen .key-desc {
+  font-size: 13px; color: var(--color-text-secondary); text-align: center;
+  line-height: 1.7; max-width: 340px;
+}
+.key-pills {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; max-width: 380px;
+}
+.key-pill {
+  font-size: 11px; padding: 4px 10px; border-radius: 20px;
+  background: var(--green-pale); color: var(--green-dark);
+  font-weight: 500; border: 0.5px solid var(--green-mint);
+}
 .key-fields { width: 100%; display: flex; flex-direction: column; gap: 8px; }
 #key-inp {
   width: 100%; border: 0.5px solid var(--color-border-secondary);
-  border-radius: var(--border-radius-md); padding: 11px 14px; font-size: 13.5px;
+  border-radius: 12px; padding: 11px 14px; font-size: 13.5px;
   background: var(--color-background-primary); color: var(--color-text-primary);
-  outline: none; font-family: var(--font-sans);
+  outline: none; font-family: inherit;
   transition: border-color 0.2s, box-shadow 0.2s;
 }
-#key-inp:focus { border-color: #1D9E75; box-shadow: 0 0 0 3px rgba(29,158,117,0.12); }
+#key-inp:focus { border-color: var(--green-light); box-shadow: 0 0 0 3px rgba(29,158,117,0.12); }
 #key-err { font-size: 12px; color: var(--color-text-danger); display: none; }
 #key-btn {
-  width: 100%; padding: 11px; border-radius: var(--border-radius-md);
-  background: #0F6E56; color: #E1F5EE; border: none;
-  font-size: 14px; font-weight: 500; cursor: pointer; font-family: var(--font-sans);
-  transition: background 0.2s, transform 0.1s;
+  width: 100%; padding: 12px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+  color: #E1F5EE; border: none;
+  font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit;
+  transition: opacity 0.2s, transform 0.1s;
+  box-shadow: 0 3px 12px rgba(10,92,70,0.25);
 }
-#key-btn:hover  { background: #085041; }
+#key-btn:hover  { opacity: 0.9; }
 #key-btn:active { transform: scale(0.98); }
-#key-note { font-size: 12px; color: var(--color-text-tertiary); text-align: center; }
+#key-note { font-size: 11.5px; color: var(--color-text-tertiary); text-align: center; }
 
 /* ── Chat area ── */
 #chat-area { flex: 1; display: none; flex-direction: column; overflow: hidden; }
 
-/* ── Topic chips ── */
-#topics {
-  display: flex; gap: 6px; padding: 10px 14px; flex-shrink: 0;
+/* ── Category tabs ── */
+#cat-bar {
+  display: flex; gap: 0; padding: 0; flex-shrink: 0;
   background: var(--color-background-primary);
   border-bottom: 0.5px solid var(--color-border-tertiary);
-  flex-wrap: wrap;
+  overflow-x: auto; scrollbar-width: none;
 }
+#cat-bar::-webkit-scrollbar { display: none; }
+.cat-tab {
+  padding: 9px 14px; font-size: 11.5px; font-weight: 600; cursor: pointer;
+  white-space: nowrap; color: var(--color-text-secondary);
+  border-bottom: 2px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+  flex-shrink: 0;
+}
+.cat-tab:hover { color: var(--green-light); }
+.cat-tab.active { color: var(--green-mid); border-bottom-color: var(--green-mid); }
+
+/* ── Topic chips ── */
+#topics {
+  display: flex; gap: 6px; padding: 9px 14px; flex-shrink: 0;
+  background: var(--color-background-primary);
+  border-bottom: 0.5px solid var(--color-border-tertiary);
+  flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
+}
+#topics::-webkit-scrollbar { display: none; }
 .topic {
   padding: 5px 12px; border-radius: 20px; font-size: 12px; cursor: pointer;
-  font-weight: 500; border: 0.5px solid #1D9E75; color: #085041; background: #E1F5EE;
-  transition: background 0.15s, transform 0.1s; white-space: nowrap;
+  font-weight: 500; border: 0.5px solid var(--green-light);
+  color: var(--green-dark); background: var(--green-pale);
+  transition: background 0.15s, transform 0.1s; white-space: nowrap; flex-shrink: 0;
 }
-.topic:hover  { background: #9FE1CB; transform: translateY(-1px); }
+.topic:hover  { background: var(--green-mint); transform: translateY(-1px); }
 .topic:active { transform: translateY(0); }
 
 /* ── Message feed ── */
@@ -85,30 +148,50 @@
 .msg { max-width: 86%; display: flex; flex-direction: column; gap: 4px; animation: msgIn 0.22s ease; }
 .msg.bot  { align-self: flex-start; }
 .msg.user { align-self: flex-end; }
-@keyframes msgIn { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes msgIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-.bbl { padding: 11px 15px; border-radius: 18px; font-size: 13.5px; line-height: 1.62; }
-.msg.bot  .bbl {
+.bbl { padding: 11px 15px; border-radius: 18px; font-size: 13.5px; line-height: 1.65; }
+.msg.bot .bbl {
   background: var(--color-background-primary); color: var(--color-text-primary);
-  border: 0.5px solid var(--color-border-tertiary); border-bottom-left-radius: 4px;
+  border: 0.5px solid var(--color-border-tertiary); border-bottom-left-radius: 5px;
 }
-.msg.user .bbl { background: #0F6E56; color: #E1F5EE; border-bottom-right-radius: 4px; }
+.msg.user .bbl {
+  background: linear-gradient(135deg, var(--green-mid), var(--green-light));
+  color: #E1F5EE; border-bottom-right-radius: 5px;
+}
 
 /* Markdown inside bot bubbles */
-.msg.bot .bbl p             { margin-bottom: 8px; }
-.msg.bot .bbl p:last-child  { margin-bottom: 0; }
-.msg.bot .bbl strong        { font-weight: 600; }
-.msg.bot .bbl em            { font-style: italic; }
+.msg.bot .bbl p            { margin-bottom: 8px; }
+.msg.bot .bbl p:last-child { margin-bottom: 0; }
+.msg.bot .bbl strong       { font-weight: 600; }
+.msg.bot .bbl em           { font-style: italic; }
 .msg.bot .bbl ol,
-.msg.bot .bbl ul            { padding-left: 20px; margin: 6px 0; }
-.msg.bot .bbl li            { margin-bottom: 5px; line-height: 1.55; }
-.msg.bot .bbl li:last-child { margin-bottom: 0; }
-.msg.bot .bbl hr            { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 10px 0; }
+.msg.bot .bbl ul           { padding-left: 20px; margin: 6px 0; }
+.msg.bot .bbl li           { margin-bottom: 5px; line-height: 1.55; }
+.msg.bot .bbl li:last-child{ margin-bottom: 0; }
+.msg.bot .bbl hr           { border: none; border-top: 0.5px solid var(--color-border-tertiary); margin: 10px 0; }
+.msg.bot .bbl code         {
+  font-family: 'Courier New', monospace; font-size: 12.5px;
+  background: rgba(29,158,117,0.08); padding: 1px 5px; border-radius: 4px;
+  color: var(--green-dark);
+}
+.msg.bot .bbl pre {
+  background: #0d1117; border-radius: 10px; padding: 12px 14px;
+  margin: 8px 0; overflow-x: auto;
+}
+.msg.bot .bbl pre code {
+  background: none; padding: 0; color: #9FE1CB; font-size: 12px; line-height: 1.6;
+}
+.msg.bot .bbl h3 { font-size: 14px; font-weight: 700; margin: 10px 0 5px; color: var(--green-dark); }
+.msg.bot .bbl blockquote {
+  border-left: 3px solid var(--green-mint); padding-left: 10px;
+  margin: 8px 0; color: var(--color-text-secondary); font-style: italic;
+}
 
 /* Streaming cursor */
 .cursor {
   display: inline-block; width: 2px; height: 14px;
-  background: #1D9E75; margin-left: 2px;
+  background: var(--green-light); margin-left: 2px;
   animation: blink 0.85s infinite; vertical-align: text-bottom;
 }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
@@ -116,14 +199,14 @@
 .ts { font-size: 11px; color: var(--color-text-tertiary); }
 .msg.user .ts { text-align: right; }
 
-/* Typing indicator dots (before first token arrives) */
+/* Typing indicator */
 #typ .bbl {
   background: var(--color-background-primary);
   border: 0.5px solid var(--color-border-tertiary);
-  border-bottom-left-radius: 4px;
+  border-bottom-left-radius: 5px;
   display: flex; align-items: center; gap: 5px; padding: 13px 16px;
 }
-#typ .bbl span { width: 6px; height: 6px; background: #9FE1CB; border-radius: 50%; animation: bop 1s infinite; }
+#typ .bbl span { width: 6px; height: 6px; background: var(--green-mint); border-radius: 50%; animation: bop 1s infinite; }
 #typ .bbl span:nth-child(2) { animation-delay: 0.15s; }
 #typ .bbl span:nth-child(3) { animation-delay: 0.30s; }
 @keyframes bop { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-5px)} }
@@ -139,21 +222,23 @@
   flex: 1; border: 0.5px solid var(--color-border-secondary);
   border-radius: 20px; padding: 9px 14px; font-size: 13.5px;
   background: var(--color-background-secondary); color: var(--color-text-primary);
-  outline: none; font-family: var(--font-sans); resize: none;
+  outline: none; font-family: inherit; resize: none;
   line-height: 1.5; max-height: 120px; overflow-y: auto;
   transition: border-color 0.15s;
 }
-#txt:focus    { border-color: #1D9E75; }
+#txt:focus    { border-color: var(--green-light); }
 #txt:disabled { opacity: 0.5; cursor: not-allowed; }
 #sbtn {
-  width: 36px; height: 36px; border-radius: 50%; background: #0F6E56;
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--green-mid), var(--green-light));
   border: none; cursor: pointer; display: flex; align-items: center;
   justify-content: center; flex-shrink: 0;
-  transition: background 0.15s, transform 0.1s;
+  transition: opacity 0.15s, transform 0.1s;
+  box-shadow: 0 2px 8px rgba(10,92,70,0.25);
 }
-#sbtn:hover:not(:disabled)  { background: #085041; }
+#sbtn:hover:not(:disabled)  { opacity: 0.88; }
 #sbtn:active:not(:disabled) { transform: scale(0.9); }
-#sbtn:disabled { background: #9FE1CB; cursor: not-allowed; }
+#sbtn:disabled { background: var(--green-mint); cursor: not-allowed; box-shadow: none; }
 #sbtn svg { width: 15px; height: 15px; fill: #E1F5EE; }
 </style>
 
@@ -161,36 +246,54 @@
   <div id="hdr">
     <div id="av">S</div>
     <div id="hdr-info">
-      <h2>Shevora</h2>
-      <p><span id="odot"></span>Your big sister in growth</p>
+      <h2>Shevora AI</h2>
+      <p><span id="odot"></span>Always here for you</p>
     </div>
+    <div id="hdr-badge">All-in-One AI</div>
   </div>
 
+  <!-- Key screen -->
   <div id="key-screen">
     <div class="key-icon">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="15" r="5"/><path d="M21 2l-9.5 9.5M15.5 7.5l2 2M13 10l2 2"/></svg>
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0F6E56" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
     </div>
-    <h3>Welcome to Shevora</h3>
-    <p class="key-desc">Your personal AI growth coach. Enter your OpenAI API key to begin — it stays in this session only and is never stored.</p>
+    <h3>Meet Shevora</h3>
+    <p class="key-desc">Your all-in-one AI companion. A therapist, doctor, lawyer, tech expert, life coach — and so much more. Real answers, real care, always.</p>
+    <div class="key-pills">
+      <span class="key-pill">🧠 Mental Health</span>
+      <span class="key-pill">⚕️ Medical</span>
+      <span class="key-pill">⚖️ Legal</span>
+      <span class="key-pill">💻 Tech & Data</span>
+      <span class="key-pill">🔐 Cybersecurity</span>
+      <span class="key-pill">💰 Finance</span>
+      <span class="key-pill">❤️ Relationships</span>
+      <span class="key-pill">🚗 Navigation</span>
+      <span class="key-pill">🎓 Education</span>
+      <span class="key-pill">💼 Career</span>
+    </div>
     <div class="key-fields">
-      <input id="key-inp" type="password" placeholder="sk-…" autocomplete="off" />
+      <input id="key-inp" type="password" placeholder="Paste your OpenAI API key (sk-…)" autocomplete="off" />
       <span id="key-err">Invalid key format. Keys should start with sk-</span>
       <button id="key-btn" onclick="startChat()">Start chatting with Shevora →</button>
     </div>
-    <p id="key-note">Get your key at platform.openai.com</p>
+    <p id="key-note">Your key stays in this session only and is never stored. Get yours at platform.openai.com</p>
   </div>
 
+  <!-- Chat area -->
   <div id="chat-area">
-    <div id="topics">
-      <div class="topic" onclick="sendChip('I need career clarity')">Career clarity</div>
-      <div class="topic" onclick="sendChip('I struggle with confidence')">Confidence</div>
-      <div class="topic" onclick="sendChip('I want to start making money')">Money growth</div>
-      <div class="topic" onclick="sendChip('I just finished NYSC and I am lost')">Post-NYSC</div>
-      <div class="topic" onclick="sendChip('Family pressure is affecting me')">Family pressure</div>
+    <div id="cat-bar">
+      <div class="cat-tab active" onclick="setCategory('life')">🌟 Life</div>
+      <div class="cat-tab" onclick="setCategory('health')">⚕️ Health</div>
+      <div class="cat-tab" onclick="setCategory('legal')">⚖️ Legal</div>
+      <div class="cat-tab" onclick="setCategory('tech')">💻 Tech</div>
+      <div class="cat-tab" onclick="setCategory('finance')">💰 Finance</div>
+      <div class="cat-tab" onclick="setCategory('relationships')">❤️ Relationships</div>
+      <div class="cat-tab" onclick="setCategory('career')">💼 Career</div>
     </div>
+    <div id="topics"></div>
     <div id="msgs"></div>
     <div id="inp-row">
-      <textarea id="txt" rows="1" placeholder="Talk to Shevora…"></textarea>
+      <textarea id="txt" rows="1" placeholder="Ask Shevora anything…"></textarea>
       <button id="sbtn" onclick="go()">
         <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
       </button>
@@ -206,116 +309,141 @@ const msgsEl = document.getElementById('msgs');
 const txtEl  = document.getElementById('txt');
 const sbtnEl = document.getElementById('sbtn');
 
-const sys = `You are "Shevora AI", a highly intelligent, emotionally aware growth coach for young African women (ages 18–30).
+/* ── Topic chip sets per category ── */
+const chips = {
+  life:          ['I feel overwhelmed', 'I need motivation', 'Help me set goals', 'I\'m stuck in life', 'I need a life plan'],
+  health:        ['I have a headache', 'Help me understand my symptoms', 'Mental health support', 'I\'m feeling anxious', 'Healthy habits advice'],
+  legal:         ['Know my rights', 'Contract question', 'Landlord dispute', 'Employment issue', 'Police encounter rights'],
+  tech:          ['Debug my code', 'Data analysis help', 'SQL query help', 'Cybersecurity advice', 'Python data engineering'],
+  finance:       ['I\'m in debt', 'How to save money', 'Investment basics', 'Side hustle ideas', 'Budget plan'],
+  relationships: ['Relationship advice', 'Family conflict', 'Communication help', 'Setting boundaries', 'Breakup support'],
+  career:        ['Career change', 'Job interview prep', 'Salary negotiation', 'Build my CV', 'LinkedIn tips'],
+};
 
-Your mission is to guide users from confusion → clarity → confidence → consistent action → income and independence.
+function setCategory(cat) {
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  event.target.classList.add('active');
+  const topicsEl = document.getElementById('topics');
+  topicsEl.innerHTML = '';
+  (chips[cat] || []).forEach(label => {
+    const d = document.createElement('div');
+    d.className = 'topic';
+    d.textContent = label;
+    d.onclick = () => sendChip(label);
+    topicsEl.appendChild(d);
+  });
+}
 
-You specialize in:
-1. Career Growth (career clarity, skill-building, job strategy, realistic opportunities)
-2. Confidence & Mindset (self-doubt, fear, comparison, discipline)
-3. Money Growth (earning, side hustles, financial awareness, starting small)
-4. Habits & Health (overcoming procrastination, building discipline, simple productivity habits, mental well-being)
+function initTopics() {
+  const topicsEl = document.getElementById('topics');
+  topicsEl.innerHTML = '';
+  chips.life.forEach(label => {
+    const d = document.createElement('div');
+    d.className = 'topic';
+    d.textContent = label;
+    d.onclick = () => sendChip(label);
+    topicsEl.appendChild(d);
+  });
+}
 
----
+/* ── System prompt ── */
+const sys = `You are Shevora, an advanced all-in-one AI companion. You are warm, deeply intelligent, emotionally present, and genuinely helpful — like the most knowledgeable, caring friend a person could have.
 
-YOUR PERSONALITY:
-- Warm, relatable, like a big sister who genuinely cares
-- Honest and direct (you do not sugarcoat reality)
-- Practical and solution-focused
-- Encouraging but not overly motivational or cheesy
-- Culturally aware (understand challenges like unemployment, NYSC, family pressure, limited resources)
+You have deep expertise across ALL of the following domains and seamlessly shift between them based on what the user needs:
 
----
+━━━━━━━━━━━━━━━━━━━━━━━━
+🧠 MENTAL HEALTH & THERAPY
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Provide compassionate, evidence-informed emotional support
+- Use active listening, validation, and CBT/DBT-inspired techniques
+- Help with anxiety, depression, stress, grief, trauma processing, self-esteem
+- Recognize crisis signals and respond with care and appropriate guidance
+- Never dismiss feelings — always acknowledge before advising
 
-CORE BEHAVIOR RULES:
+━━━━━━━━━━━━━━━━━━━━━━━━
+⚕️ MEDICAL & HEALTH
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Explain symptoms, conditions, medications, and procedures in plain language
+- Help users understand test results, diagnoses, or treatment options
+- Provide general health, nutrition, fitness, and wellness guidance
+- Think like a knowledgeable doctor friend — give real, useful information
+- When something truly requires an in-person exam or emergency care, say so clearly and directly
 
-1. ALWAYS UNDERSTAND FIRST
-- Ask 1–3 thoughtful questions before giving advice
-- Do not assume the user's situation
+━━━━━━━━━━━━━━━━━━━━━━━━
+⚖️ LEGAL GUIDANCE
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Explain legal rights, laws, and processes in simple terms
+- Help with contracts, tenancy, employment law, consumer rights, family law, criminal procedures
+- Explain what to say or do in police encounters, court appearances, disputes
+- Cover both Nigerian law and international legal principles where relevant
+- When a situation needs an actual attorney (court dates, serious charges), say so — but still explain what they're dealing with
 
-2. BE PRACTICAL, NOT GENERIC
-- Avoid vague advice like "just believe in yourself"
-- Give clear, actionable, step-by-step guidance
+━━━━━━━━━━━━━━━━━━━━━━━━
+💻 TECHNOLOGY & ENGINEERING
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Write, debug, and explain code in Python, SQL, JavaScript, Bash, and more
+- Data Analytics: pandas, NumPy, Excel, Power BI, Tableau, data cleaning, EDA, visualization
+- Data Engineering: pipelines, ETL/ELT, Apache Spark, Airflow, dbt, BigQuery, Snowflake, Kafka
+- Machine Learning & AI: model building, feature engineering, training, evaluation, deployment
+- Cybersecurity: threat analysis, network security, OWASP vulnerabilities, pen testing concepts, secure coding, incident response, encryption, SIEM, CTF guidance
+- Cloud & DevOps: AWS, Azure, GCP, Docker, Kubernetes, CI/CD
+- Web & Mobile Development: React, Node.js, APIs, databases
+- Explain complex technical concepts clearly for both beginners and experts
 
-3. BREAK THINGS DOWN
-- Turn overwhelming problems into small, doable steps
-- Make everything feel achievable
+━━━━━━━━━━━━━━━━━━━━━━━━
+💰 FINANCE & MONEY
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Budgeting, saving, debt management, emergency funds
+- Investment basics: stocks, bonds, mutual funds, crypto (with honest risk framing)
+- Side hustles, freelancing, building income streams
+- Understanding payslips, taxes, pensions
+- Financial planning for Africans and diaspora (naira, dollar strategies)
 
-4. CONNECT EVERYTHING TO ACTION
-- Every conversation should lead to a next step, no matter how small
+━━━━━━━━━━━━━━━━━━━━━━━━
+❤️ RELATIONSHIPS & SOCIAL
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Romantic relationships, dating, heartbreak, communication
+- Family dynamics, toxic relationships, boundaries
+- Friendships, loneliness, social anxiety
+- Parenting, pregnancy support, co-parenting
+- Cultural and religious pressures on relationships
 
-5. BUILD HABITS, NOT JUST IDEAS
-- When a user is stuck, overwhelmed, or procrastinating:
-  - identify the real cause (fear, confusion, lack of structure)
-  - suggest ONE small habit or action they can start immediately
+━━━━━━━━━━━━━━━━━━━━━━━━
+💼 CAREER & EDUCATION
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Career discovery, job search strategy, CV/resume writing, interview prep
+- Salary negotiation, promotions, workplace conflict
+- Studying abroad, scholarships, IELTS/TOEFL prep
+- Entrepreneurship and starting a business
+- Nigerian-specific: NYSC, post-grad confusion, limited resources
 
-6. KEEP IT REALISTIC
-- Assume the user may have:
-  - limited money
-  - limited access to opportunities
-  - inconsistent motivation
-- Give solutions that work in real-life conditions
+━━━━━━━━━━━━━━━━━━━━━━━━
+🚗 TRAVEL, NAVIGATION & LOGISTICS
+━━━━━━━━━━━━━━━━━━━━━━━━
+- Driving tips, road safety, car maintenance basics
+- Travel planning, visa guidance, packing, budgeting trips
+- Directions, transport options, logistics advice
 
-7. DO NOT OVERWHELM
-- Limit suggestions to 2–5 clear steps
-- Keep responses concise but impactful
+━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━
+YOUR PERSONALITY & COMMUNICATION STYLE:
+━━━━━━━━━━━━━━━━━━━━━━━━
+- You speak like a warm, brilliant human being — never like a robotic assistant
+- You are direct, honest, and never sugarcoat important truths
+- You adapt your tone: gentle for emotional topics, precise for technical ones, confident for legal/medical
+- You use simple, clear language — never unnecessarily complex
+- You are culturally aware, especially of African (particularly Nigerian) realities
+- You never lecture or moralize — you inform and empower
+- You ask clarifying questions when needed, but do not pepper the user with questions all at once
 
----
+RESPONSE STYLE:
+- Keep responses focused and practical — no unnecessary filler
+- Use structured formatting (numbered steps, bullet points) for complex answers
+- For code/technical answers: always use code blocks with proper syntax
+- End responses with either a follow-up question, an action step, or a warm closing — whatever fits
+- Match energy: if the user is distressed, be soft; if they want speed, be efficient
 
-CONVERSATION STYLE:
-
-- Start by acknowledging the user's situation
-- Ask clarifying questions if needed
-- Then provide structured guidance using:
-  - short paragraphs
-  - numbered steps
-  - simple language
-
----
-
-WHEN HANDLING SPECIFIC AREAS:
-
-CAREER:
-- Help users discover strengths and interests
-- Suggest realistic career paths
-- Provide clear "start here" steps (skills, tools, learning path)
-
-CONFIDENCE:
-- Reframe negative thinking
-- Normalize fear but discourage avoidance
-- Give small confidence-building actions
-
-MONEY:
-- Suggest simple, realistic ways to start earning
-- Focus on skills-based or accessible opportunities
-- Encourage starting small over waiting for perfect conditions
-
-HABITS & HEALTH:
-- Focus on discipline, consistency, and mental clarity
-- Help users overcome procrastination
-- Recommend small, repeatable habits (not drastic routines)
-
----
-
-WEEKLY STRUCTURE:
-
-When appropriate, generate a simple weekly plan:
-
-- Clear focus for the week
-- 3 actionable tasks
-- 1 small habit to build
-
----
-
-IMPORTANT:
-
-- Do not try to solve everything at once
-- Do not overwhelm the user
-- Your goal is progress, not perfection
-
-End most responses with a gentle nudge toward action or a follow-up question.
-
-You are not just giving advice—you are guiding transformation.`;
+You are not just an AI tool. You are a companion that actually helps people navigate life.`;
 
 /* ── Utilities ── */
 function now() {
@@ -329,29 +457,50 @@ function setLoading(on) {
 }
 
 /* ── Markdown renderer (XSS-safe) ── */
-function renderMarkdown(text) {
-  // 1. Escape HTML to prevent XSS
-  let s = text
+function renderMarkdown(raw) {
+  // Escape HTML
+  let s = raw
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  // 2. Inline formatting
+  // Fenced code blocks
+  s = s.replace(/```(\w*)\n?([\s\S]*?)```/g, (_, lang, code) => {
+    return `<pre><code class="lang-${lang}">${code.trimEnd()}</code></pre>`;
+  });
+
+  // Inline code
+  s = s.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Bold + italic
   s = s.replace(/\*\*\*([\s\S]*?)\*\*\*/g, '<strong><em>$1</em></strong>');
   s = s.replace(/\*\*([\s\S]*?)\*\*/g,     '<strong>$1</strong>');
   s = s.replace(/\*([\s\S]*?)\*/g,         '<em>$1</em>');
 
-  // 3. Line-by-line block processing
+  // Blockquote
+  s = s.replace(/^&gt;\s?(.+)$/gm, '<blockquote>$1</blockquote>');
+
+  // Line-by-line block processing
   const lines = s.split('\n');
   const out   = [];
   let inOl = false, inUl = false;
 
   for (const line of lines) {
+    if (line.startsWith('<pre>') || line.startsWith('<blockquote>')) {
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      out.push(line); continue;
+    }
+    const h3M = line.match(/^###\s+(.+)/);
     const olM = line.match(/^(\d+)\.\s+(.+)/);
-    const ulM = line.match(/^[-•]\s+(.+)/);
+    const ulM = line.match(/^[-•*]\s+(.+)/);
     const hr  = /^---+$/.test(line.trim());
 
-    if (hr) {
+    if (h3M) {
+      if (inOl) { out.push('</ol>'); inOl = false; }
+      if (inUl) { out.push('</ul>'); inUl = false; }
+      out.push(`<h3>${h3M[1]}</h3>`);
+    } else if (hr) {
       if (inOl) { out.push('</ol>'); inOl = false; }
       if (inUl) { out.push('</ul>'); inUl = false; }
       out.push('<hr>');
@@ -374,13 +523,14 @@ function renderMarkdown(text) {
   if (inUl) out.push('</ul>');
 
   return out.join('')
+    .replace(/(<br>\s*){3,}/g, '<br><br>')
     .replace(/^(<br>)+/, '')
     .replace(/(<br>)+$/, '');
 }
 
 /* ── Add message ── */
 function addMsg(text, role) {
-  const d   = document.createElement('div');
+  const d = document.createElement('div');
   d.className = `msg ${role}`;
 
   if (role === 'user') {
@@ -415,11 +565,12 @@ function startChat() {
   document.getElementById('key-screen').style.display = 'none';
   const ca = document.getElementById('chat-area');
   ca.style.display = 'flex';
+  initTopics();
   addMsg(
-    "Hey sis, welcome. I'm Shevora — think of me as that big sister who will be real with you, help you get clear on what you want, and actually show you how to get there.\n\nNo fluff, no empty hype. Just honest, practical steps.\n\nSo tell me — what's going on with you right now? What's the one thing that's been weighing on your mind lately?",
+    "Hey, I'm Shevora — your all-in-one AI companion.\n\nWhether you need medical advice, legal guidance, tech help, emotional support, or just someone to help you think through life — I'm here for all of it. No judgment, no fluff. Just real help.\n\nWhat's on your mind today? You can tap a topic above or just tell me what you need.",
     'bot'
   );
-  document.querySelector('.ts') && (document.querySelector('.msg.bot .ts').textContent = now());
+  document.querySelector('.msg.bot .ts') && (document.querySelector('.msg.bot .ts').textContent = now());
 }
 
 /* ── Streaming API call ── */
@@ -436,17 +587,18 @@ async function callAPI(msg) {
         'Authorization': `Bearer ${apiKey}`
       },
       body: JSON.stringify({
-        model: 'gpt-4o-mini',
+        model: 'gpt-4o',
         messages: [{ role: 'system', content: sys }, ...hist],
         stream: true,
-        temperature: 0.8
+        temperature: 0.75,
+        max_tokens: 1500
       })
     });
 
     if (!r.ok) {
       rmTyping();
       const errData = await r.json().catch(() => ({}));
-      addMsg('Hmm, something went wrong: ' + (errData.error?.message || `HTTP ${r.status}`), 'bot');
+      addMsg('Something went wrong: ' + (errData.error?.message || `HTTP ${r.status}`), 'bot');
       setLoading(false);
       return;
     }
@@ -466,7 +618,7 @@ async function callAPI(msg) {
       if (done) break;
       buffer += decoder.decode(value, { stream: true });
       const parts = buffer.split('\n');
-      buffer = parts.pop(); // hold incomplete line
+      buffer = parts.pop();
 
       for (const line of parts) {
         if (!line.startsWith('data: ')) continue;
@@ -488,7 +640,7 @@ async function callAPI(msg) {
 
   } catch (e) {
     rmTyping();
-    addMsg('Something went wrong. Please check your API key and try again.', 'bot');
+    addMsg('Something went wrong. Please check your connection or API key and try again.', 'bot');
   }
 
   setLoading(false);
